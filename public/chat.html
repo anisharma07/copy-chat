@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Copy Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link rel="stylesheet" href="background.css" /> -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <textarea class="copy-textarea"></textarea>
+    <div class="room-users-modal">
+      <h1 class="close_btn">x</h1>
+      <a class="log-out"><i class="bx bx-log-out"></i></a>
+
+      <ol id="room-users" class="room-users"></ol>
+    </div>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="images/chat2.png" alt="logo" class="app-logo" />
+        </div>
+        <div class="room-name-div">
+          <p class="copy-room-id"><i class="bx bxs-copy"></i></p>
+          <h3 class="room-name"></h3>
+        </div>
+        <div class="room">
+          <i class="bx bx-share-alt"></i>
+          <img src="images/afds.png" alt="group" class="users-group" />
+          <h1 class="NumberOfUsers">1</h1>
+        </div>
+      </nav>
+    </header>
+    <div id="container" class="container">
+      <div class="error-wrong-link hidden">
+        <img src="images/200w.gif" width="80%" />
+        <p>Wrong Link found!! .... Enter a valid link</p>
+        <br />
+        <p class="hints-to-Join">
+          HINT💡 1: To Create a room, link must contain a username and
+          type="create"
+        </p>
+        <p class="hints-to-Join">
+          HINT💡 2: To Join a room, link must contain a username and a 6 digit
+          roomId.
+        </p>
+        <br />
+        <p class="or">or</p>
+        <br />
+        <a href="" id="go-home-link" class="button-29">go to home page</a>
+      </div>
+      <div id="chatbox" class=""></div>
+    </div>
+
+    <footer class="isLoggedIn">
+      <form id="form" action="">
+        <textarea id="input" autocomplete="off"></textarea>
+        <button>Send</button>
+      </form>
+    </footer>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="./js/chat.js"></script>
+  </body>
+</html>

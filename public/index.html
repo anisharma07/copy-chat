@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Copy Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link rel="stylesheet" href="background.css" /> -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="images/chat2.png" alt="logo" class="app-logo" />
+        </div>
+      </nav>
+    </header>
+    <div class="overlay hidden"></div>
+    <div class="modal create-modal onCreate hidden">
+      <button class="close-modal" onclick="closeModalFunction('create-modal')">
+        &times;
+      </button>
+      <form action="chat.html" class="create-chat-form">
+        <div class="join create-to-absolute">
+          <label for="username">Username: </label>
+          <input
+            type="text"
+            name="username"
+            id="usernameInput"
+            placeholder="Enter your username"
+            class="modalInput"
+            value="Guest"
+            required
+          />
+        </div>
+        <input type="hidden" name="type" value="create" />
+        <button onclick="Submit" class="button-29 home-btn">Create Chat</button>
+      </form>
+    </div>
+    <div class="modal join-modal onJoin hidden">
+      <button class="close-modal" onclick="closeModalFunction('join-modal')">
+        &times;
+      </button>
+      <form action="chat.html">
+        <div class="join">
+          <div>
+            <label for="username">Username: </label>
+            <input
+              type="text"
+              name="username"
+              id="joinUserNameInput"
+              placeholder="Enter your username"
+              class="modalInput"
+              value="Guest"
+              maxlength="20"
+              minlength="3"
+              required
+            />
+          </div>
+          <div>
+            <label for="roomId">Room Id: </label>
+            <input
+              type="number"
+              name="roomId"
+              id="userRoomId"
+              placeholder="Enter roomId(6 digit number)"
+              class="modalInput"
+              max="999999"
+              min="100000"
+              required
+            />
+          </div>
+        </div>
+        <input type="hidden" name="type" value="join" />
+        <button onclick="Submit" class="button-29 home-btn">Join Chat</button>
+      </form>
+    </div>
+
+    <div id="container" class="container">
+      <div class="buttons">
+        <button class="create-chat chatBtn" onclick="openModal('create-modal')">
+          Create Chat
+        </button>
+        <button class="join-chat chatBtn" onclick="openModal('join-modal')">
+          Join Chat
+        </button>
+      </div>
+
+      <div id="chatbox" class="hidden"></div>
+    </div>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
