@@ -61,15 +61,17 @@ form.addEventListener("submit", (e) => {
 });
 
 let i = 1;
-socket.on("chat message", (msg, username, uniqueUserId) => {
+socket.on("chat message", (object) => {
   const html = `
 <div class="card">
 <div class="cardHeader">
-<div>${username}#${uniqueUserId}<span class="message-time">${getTime()}</span></div>
+<div>${object.nameOfUser}#${
+    object.userId
+  }<span class="message-time">${getTime()}</span></div>
 <p id="copyButton${i}" onclick="copyToClipboard(${i})"><i class='bx bx-copy'></i> copy chat</p>
 </div>
 <div class="cardContent">
-<textarea id="message" class="textarea${i}" readonly>${msg}</textarea
+<textarea id="message" class="textarea${i}" readonly>${object.msg}</textarea
 >
 </div>
 </div>`;
@@ -80,15 +82,18 @@ socket.on("chat message", (msg, username, uniqueUserId) => {
   i++;
 });
 
-socket.on("my chat message", (msg, username, uniqueUserId) => {
+socket.on("my chat message", (object) => {
   const html = `
 <div  id= "my-card" class="card">
+
 <div class="cardHeader">
-<div>${username}#${uniqueUserId}<span class="message-time">${getTime()}</span></div>
+<div>${object.nameOfUser}#${
+    object.userId
+  }<span class="message-time">${getTime()}</span></div>
 <p id="copyButton${i}" onclick="copyToClipboard(${i})"><i class='bx bx-copy'></i> copy chat</p>
 </div>
 <div class="cardContent">
-<textarea id="message" class="textarea${i}" readonly>${msg}</textarea
+<textarea id="message" class="textarea${i}" readonly>${object.msg}</textarea
 >
 </div>
 </div>`;
@@ -99,6 +104,7 @@ socket.on("my chat message", (msg, username, uniqueUserId) => {
   scrollToBottom();
   i++;
 });
+
 function adjustTextareaHeight(textarea) {
   textarea.style.height = ""; // Reset height
   if (textarea.scrollHeight < 290) {
@@ -107,6 +113,7 @@ function adjustTextareaHeight(textarea) {
     textarea.style.height = "290px";
   }
 }
+
 function scrollToBottom() {
   const container = document.querySelector(".container");
   container.scrollTo({
@@ -114,18 +121,18 @@ function scrollToBottom() {
     behavior: "smooth", // This will make the scrolling smooth
   });
 }
+
 function copyToClipboard(chatNumberi) {
   const textarea = document.querySelector(`.textarea${chatNumberi}`);
   const copied = document.getElementById(`copyButton${chatNumberi}`);
   // Select the text inside the textarea
   textarea.select();
-  const success = document.execCommand("copy");
-  if (success) {
-    copied.innerHTML = "✓ copied";
-    setTimeout(function () {
-      copied.innerHTML = "<i class='bx bx-copy'></i> copy chat";
-    }, 1500);
-  }
+
+  navigator.clipboard.writeText(textarea.value);
+  copied.innerHTML = "✓ copied";
+  setTimeout(function () {
+    copied.innerHTML = "<i class='bx bx-copy'></i> copy chat";
+  }, 1500);
 }
 
 function createChat() {
@@ -230,10 +237,7 @@ shareLink.addEventListener("click", function () {
   }, 1500);
 });
 function copyText(text) {
-  const copytextarea = document.querySelector(".copy-textarea");
-  copytextarea.value = text;
-  copytextarea.select();
-  document.execCommand("copy");
+  navigator.clipboard.writeText(text);
 }
 roomNameDiv.addEventListener("click", function () {
   roomName = document.querySelector(".room-name");
