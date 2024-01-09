@@ -467,10 +467,7 @@ sub {
   color: white;
   font-size: 16px;
 }
-.copy-textarea {
-  position: absolute;
-  opacity: 0;
-}
+
 .hidden {
   display: none;
 }
